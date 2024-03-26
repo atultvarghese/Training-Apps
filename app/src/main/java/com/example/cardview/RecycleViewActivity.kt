@@ -2,6 +2,8 @@ package com.example.cardview
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -57,6 +59,8 @@ class RecycleViewActivity : AppCompatActivity() {
         var myAdaptor = InfoAdapter(myInfoList)
         recycleView.adapter = myAdaptor
 
+        var progressBar = findViewById<ProgressBar>(R.id.progressBar)
+
         val makeCall = ApiClient.retrofitBuilder.getData()
         Log.i("apidata", "Its comming afer make call")
 
@@ -67,7 +71,8 @@ class RecycleViewActivity : AppCompatActivity() {
                 if (usersList != null) {
                     myInfoList.clear() // Clear existing data
                     myInfoList.addAll(usersList) // Add new data
-                    myAdaptor.notifyDataSetChanged() // Notify adapter about the changes
+                    myAdaptor.notifyDataSetChanged()
+                    progressBar.visibility = View.INVISIBLE
                 }
             }
 
