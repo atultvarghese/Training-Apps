@@ -13,8 +13,8 @@ class InfoAdapter(var infoList : ArrayList<InformationData>) : RecyclerView.Adap
         var place = itemView.findViewById<TextView>(R.id.textViewPlace)
 
         fun infoBindData(infodata : InformationData){
-            nameItem.text = infodata.name_info
-            place.text = infodata.place
+            nameItem.text = infodata.name
+            place.text = infodata.email
 
         }
     }
