@@ -7,51 +7,67 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="226dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginBottom="42dp"
-        android:ems="10"
-        android:hint="User Name"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+        android:padding="50dp">
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="229dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/remember"
-        app:layout_constraintEnd_toEndOf="@+id/remember"
-        app:layout_constraintStart_toEndOf="@+id/remember"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
 
-    <CheckBox
-        android:id="@+id/remember"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Rememeber Me"
-        app:layout_constraintBottom_toTopOf="@+id/login_button"
-        app:layout_constraintEnd_toEndOf="@+id/login_button"
-        app:layout_constraintStart_toStartOf="@+id/login_button"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User Name"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorPrimaryDark"
+            app:shapeAppearance="@style/Rounded">
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="113dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="343dp"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/remember" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter password"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/colorAccent"
+            app:shapeAppearance="@style/Cut">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/remember"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:text="Rememeber Me"
+                tools:layout_editor_absoluteX="84dp"
+                tools:layout_editor_absoluteY="298dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login_button"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:text="Login"
+                tools:layout_editor_absoluteX="84dp"
+                tools:layout_editor_absoluteY="343dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

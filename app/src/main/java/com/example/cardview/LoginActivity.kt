@@ -22,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
-
         var usernamefield = findViewById<EditText>(R.id.username)
         var passwordfield = findViewById<EditText>(R.id.password)
         var loginButton = findViewById<Button>(R.id.login_button)
