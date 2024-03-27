@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BlinkIt</string>
+    <string name="zero">0</string>
+    <string name="init">Blink It!</string>
+</resources>
