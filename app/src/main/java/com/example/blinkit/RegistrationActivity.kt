@@ -3,7 +3,6 @@ package com.example.blinkit
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -16,7 +15,6 @@ import com.example.blinkit.dbconnection.UsersDatabase
 import com.example.blinkit.dbconnection.UsersEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
@@ -54,7 +52,7 @@ class RegistrationActivity : AppCompatActivity() {
                     if (newRowId.toInt() != -1){
                         withContext(Dispatchers.Main) {
                             showToast( "Registered Successfully")
-                            startActivity(Intent(this@RegistrationActivity, DashBoard::class.java))
+                            startActivity(Intent(this@RegistrationActivity, DashBoardActivity::class.java))
                         }
                     }else {
                         withContext(Dispatchers.Main) {

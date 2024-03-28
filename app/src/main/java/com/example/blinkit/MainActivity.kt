@@ -10,12 +10,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.room.Room
 import com.example.blinkit.dbconnection.UsersDatabase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 //                    withContext(Dispatchers.Main) {
 //                        var profile = Intent(this@MainActivity, DashBoard::class.java)
 //                    }
-                    h.post { startActivity(Intent(this@MainActivity, DashBoard::class.java)) }
+                    h.post { startActivity(Intent(this@MainActivity, DashBoardActivity::class.java)) }
                 }
             }
         }
