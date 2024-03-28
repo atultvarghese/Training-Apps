@@ -2,6 +2,8 @@ package com.example.blinkit
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -28,13 +30,11 @@ class DashBoard : AppCompatActivity() {
             insets
         }
         val recycleView = findViewById<RecyclerView>(R.id.recycle_view)
+        val progressBar = findViewById<ProgressBar>(R.id.progress_rv)
+
 //        recycleView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         recycleView.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
         var myApiData = ArrayList<Products>()
-
-        myApiData.add(Products("Atul", "https://via.placeholder.com/600/92c952"))
-
-
         var recycleViewAdapter = ProductAdapter(myApiData)
         recycleView.adapter = recycleViewAdapter
 
@@ -47,9 +47,9 @@ class DashBoard : AppCompatActivity() {
                 var products: List<Products>? = response?.body()
                 Log.i("products", "$products")
                 if (products != null){
-                    myApiData.clear()
                     myApiData.addAll(products)
                     recycleViewAdapter.notifyDataSetChanged()
+                    progressBar.visibility = View.INVISIBLE
                 }
             }
 
