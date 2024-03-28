@@ -1,5 +1,6 @@
 package com.example.blinkit
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -50,13 +51,22 @@ class RegistrationActivity : AppCompatActivity() {
                 users.password = passwordText.text.toString()
                 try {
                     val newRowId = db.usersDbCreate().addData(users)
-                    withContext(Dispatchers.Main) {
-                        showToast( "Registered Successfully $newRowId")
+                    if (newRowId.toInt() != -1){
+                        withContext(Dispatchers.Main) {
+                            showToast( "Registered Successfully")
+                            startActivity(Intent(this@RegistrationActivity, DashBoard::class.java))
+                        }
+                    }else {
+                        withContext(Dispatchers.Main) {
+                            showToast( "User Name Already exists")
+                        }
                     }
+
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
-                        showToast( "Error Registering try different user name")
+                        showToast( "Error Registering $e")
                     }
+
                 }
             }
         }

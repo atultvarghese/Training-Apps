@@ -9,7 +9,7 @@ import androidx.room.Query
 interface UsersDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addData(usersEntity: UsersEntity)
+    fun addData(usersEntity: UsersEntity) : Long
 
     @Query("select * from UsersEntity")
     fun getAllData() : List<UsersEntity>
