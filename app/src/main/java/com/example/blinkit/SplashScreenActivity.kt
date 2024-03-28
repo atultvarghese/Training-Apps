@@ -29,7 +29,7 @@ class SplashScreenActivity : AppCompatActivity() {
         var splashScreenText = findViewById<TextView>(R.id.textViewSlashScreen)
 
         GlobalScope.launch {
-            for (i in 1..5){
+            for (i in 5 downTo 1){
                 delay(1000)
                 launch(Dispatchers.Main) {
                     splashScreenText.text = "Get it in ${i.toString()} secs"
