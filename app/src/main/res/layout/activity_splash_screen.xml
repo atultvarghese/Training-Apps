@@ -25,10 +25,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="221dp"
-        android:layout_marginBottom="273dp"
+        android:layout_width="208dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="213dp"
+        android:layout_marginBottom="166dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewSlashScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
