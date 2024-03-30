@@ -9,9 +9,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.blinkit.adapters.AdapterItemClickListener
+import com.example.blinkit.CardFragment
 import com.example.blinkit.adapters.ProductAdapter
 import com.example.blinkit.apis.APIClient
 import com.example.blinkit.datas.Products
@@ -19,7 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DashBoardActivity : AppCompatActivity() {
+class DashBoardActivity : AppCompatActivity(), AdapterItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,7 +38,7 @@ class DashBoardActivity : AppCompatActivity() {
 //        recycleView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         recycleView.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
         var myApiData = ArrayList<Products>()
-        var recycleViewAdapter = ProductAdapter(myApiData)
+        var recycleViewAdapter = ProductAdapter(this, myApiData)
         recycleView.adapter = recycleViewAdapter
 
         var apiCall = APIClient.retrofitBuilder.getData()
@@ -59,5 +62,14 @@ class DashBoardActivity : AppCompatActivity() {
             }
         })
 
+    }
+    override fun onItemClicked(itemData : Products) {
+        val fragmentManager = supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        val fragment = CardFragment.newInstance(itemData)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.replace(android.R.id.content, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

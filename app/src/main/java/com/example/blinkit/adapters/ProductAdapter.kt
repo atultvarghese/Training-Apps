@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.blinkit.R
 import com.example.blinkit.datas.Products
 import com.squareup.picasso.Picasso
+interface AdapterItemClickListener {
+    fun onItemClicked(itemData :Products)
+}
+class ProductAdapter(private val listener: AdapterItemClickListener, var productList : ArrayList<Products>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
 
-class ProductAdapter(var productList : ArrayList<Products>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
 
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -37,6 +40,9 @@ class ProductAdapter(var productList : ArrayList<Products>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.productBindData(productList[position])
+        holder.itemView.setOnClickListener {
+            listener.onItemClicked(productList[position])
+        }
     }
 
 }
