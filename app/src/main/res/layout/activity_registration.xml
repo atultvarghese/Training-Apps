@@ -5,38 +5,64 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/background_gradient"
     tools:context=".RegistrationActivity">
+
 
     <EditText
         android:id="@+id/regi_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="168dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="221dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/ic_user"
+        android:drawablePadding="8dp"
         android:ems="10"
-        android:hint="User name"
+        android:hint="@string/user_name"
         android:inputType="text"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/regi_pass"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/regi_pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="39dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="8dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/regi_user"
-        app:layout_constraintTop_toBottomOf="@+id/regi_user" />
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/regi_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regi_user"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/regi_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:text="Register"
-        app:layout_constraintStart_toStartOf="@+id/regi_pass"
+        android:layout_width="155dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="300dp"
+        android:backgroundTint="@drawable/button_background"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/regi_pass" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

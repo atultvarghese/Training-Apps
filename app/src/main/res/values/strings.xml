@@ -2,4 +2,10 @@
     <string name="app_name">BlinkIt</string>
     <string name="zero">0</string>
     <string name="init">Blink It!</string>
+    <string name="user_name">User name</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="register_here">Register Here!</string>
+    <string name="login">Login</string>
+    <string name="remember_me">Remember Me</string>
 </resources>
