@@ -32,7 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
             for (i in 5 downTo 1){
                 delay(1000)
                 launch(Dispatchers.Main) {
-                    splashScreenText.text = "Get it in ${i.toString()} secs"
+                    splashScreenText.text = "Needed in 10 mins? Just BlinkIt!"
                 }
             }
         }
