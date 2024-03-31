@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.blinkit.adapters.AdapterItemClickListener
-import com.example.blinkit.CardFragment
 import com.example.blinkit.adapters.ProductAdapter
 import com.example.blinkit.apis.APIClient
 import com.example.blinkit.datas.Products

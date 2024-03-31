@@ -6,8 +6,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 interface ApiService{
-@GET("photos")
-fun getData() : Call<List<Products>>
+    @GET("photos")
+    fun getData() : Call<List<Products>>
 }
 
 class APIClient {

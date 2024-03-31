@@ -14,7 +14,6 @@ interface AdapterItemClickListener {
 }
 class ProductAdapter(private val listener: AdapterItemClickListener, var productList : ArrayList<Products>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
 
-
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         var titleBox = itemView.findViewById<TextView>(R.id.title)

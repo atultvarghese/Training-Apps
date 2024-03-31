@@ -10,4 +10,5 @@
     <string name="remember_me">Remember Me</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello Dude</string>
+    <string name="todo">TODO</string>
 </resources>

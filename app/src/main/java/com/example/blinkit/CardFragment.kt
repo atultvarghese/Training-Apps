@@ -37,7 +37,6 @@ class CardFragment : Fragment() {
             fragment.arguments = data
             return fragment
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
