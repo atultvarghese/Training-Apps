@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                         editor.remove("username")
                         editor.remove("password")
                     }
+                    editor.apply()
                     h.post {
                         Toast.makeText(this@MainActivity, "Welcome ${usernameText.text.toString()} ", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@MainActivity, DashBoardActivity::class.java))
