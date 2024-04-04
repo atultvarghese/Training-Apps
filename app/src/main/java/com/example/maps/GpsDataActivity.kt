@@ -2,7 +2,9 @@ package com.example.maps
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +17,8 @@ import com.google.android.gms.location.LocationServices
 
 class GpsDataActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var loclatlong: Location
+    var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +31,6 @@ class GpsDataActivity : AppCompatActivity() {
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -38,42 +41,15 @@ class GpsDataActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
             )
-        } else {
-            getLastLocation()
-        }
-
-    }
-
-    private fun getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
         }
         fusedLocationClient.lastLocation
-            .addOnSuccessListener { location ->
+            .addOnSuccessListener { location : Location? ->
+                // Got last known location. In some rare situations this can be null.
                 if (location != null) {
-                    // Use the location data
-                    val latitude = location.latitude
-                    val longitude = location.longitude
-                    Toast.makeText(
-                        this,
-                        "Latitude: $latitude, Longitude: $longitude",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
+                    loclatlong = location
+                    findViewById<TextView>(R.id.latitude).text = loclatlong.latitude.toString()
+                    findViewById<TextView>(R.id.longitude).text = loclatlong.longitude.toString()
+                }else {
                     Toast.makeText(this, "Location not available", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -82,32 +58,6 @@ class GpsDataActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to get location: ${e.message}", Toast.LENGTH_SHORT)
                     .show()
             }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    getLastLocation()
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Location permission denied",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                return
-            }
-        }
-    }
-
-    companion object {
-        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     }
 }
 
