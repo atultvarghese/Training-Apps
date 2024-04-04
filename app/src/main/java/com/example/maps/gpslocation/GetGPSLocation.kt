@@ -1,5 +1,3 @@
-package com.example.maps.gpslocation
-
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
@@ -7,43 +5,34 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
-class GetGPSLocation(private val context: Context) {
+object GetGPSLocation {
 
-    interface LocationCallback {
-        fun onLocationResult(latitude: Double, longitude: Double)
-        fun onLocationFailed(error: String)
-    }
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private var locationCallback: LocationCallback? = null
-    private val fusedLocationClient: FusedLocationProviderClient =
-        LocationServices.getFusedLocationProviderClient(context)
+    fun getLatLong(context: Context, callback: (lat: Double, long: Double) -> Unit) {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
-    fun setLocationCallback(callback: LocationCallback) {
-        locationCallback = callback
-    }
-
-    fun requestLocation() {
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            locationCallback?.onLocationFailed("Location permission not granted")
-            return
-        }
-
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location ->
-                if (location != null) {
-                    locationCallback?.onLocationResult(location.latitude, location.longitude)
-                } else {
-                    locationCallback?.onLocationFailed("Location not available")
+            // Permission not granted, handle accordingly
+            callback.invoke(0.0, 0.0)
+        } else {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        callback.invoke(location.latitude, location.longitude)
+                    } else {
+                        // Location not available, handle accordingly
+                        callback.invoke(0.0, 0.0)
+                    }
                 }
-            }
-            .addOnFailureListener { e ->
-                locationCallback?.onLocationFailed("Failed to get location: ${e.message}")
-            }
+                .addOnFailureListener { e ->
+                    // Failed to get location, handle accordingly
+                    callback.invoke(0.0, 0.0)
+                }
+        }
     }
 }
-
-

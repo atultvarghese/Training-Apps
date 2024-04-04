@@ -1,8 +1,11 @@
 package com.example.maps
 
+import GetGPSLocation
+import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.ActivityCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -18,11 +21,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     var requestcode = 1
+    var lattitude = 11.453121
+    var longitude = 76.061947
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        isLocationPermissionGranted()
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,39 +46,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
 
+
+        mMap = googleMap
+//        mMap.isMyLocationEnabled = true
         // Add a marker in Sydney and move the camera
 
         mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
 
-        val myHome = LatLng(11.453121, 76.061947)
+        val myHome = LatLng(lattitude, longitude)
         mMap.addMarker(MarkerOptions().position(myHome).title("Marker in Sydney"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(myHome))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myHome, 20f))
-    }
+        GetGPSLocation.getLatLong(this) { lat, long ->
+            // Handle latitude and longitude here
+            val currentLocation = LatLng(lat, long)
+            Log.i("latlong","Latitude: $lattitude, Longitude: $longitude")
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f))
 
-    private fun isLocationPermissionGranted(): Boolean {
-        return if (ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                requestcode
-            )
-            false
-        } else {
-            true
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(myHome))
         }
-    }
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myHome, 20f))
 
+    }
 }
