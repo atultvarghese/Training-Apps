@@ -53,14 +53,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in Sydney and move the camera
 
         mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+//        mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
 
-        val myHome = LatLng(lattitude, longitude)
-        mMap.addMarker(MarkerOptions().position(myHome).title("Marker in Sydney"))
+//        val myHome = LatLng(lattitude, longitude)
         GetGPSLocation.getLatLong(this) { lat, long ->
             // Handle latitude and longitude here
             val currentLocation = LatLng(lat, long)
-            Log.i("latlong","Latitude: $lattitude, Longitude: $longitude")
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f))
+            mMap.addMarker(MarkerOptions().position(currentLocation).title("Current Location"))
+            Log.i("latlong","Latitude: $lat, Longitude:     $long")
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 20f))
 
 //            mMap.moveCamera(CameraUpdateFactory.newLatLng(myHome))
         }
