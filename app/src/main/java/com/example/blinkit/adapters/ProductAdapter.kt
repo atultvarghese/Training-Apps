@@ -61,7 +61,12 @@ class ProductAdapter(private val listener: AdapterItemClickListener, var product
                     cartItem.title = products.title.toString()
                     cartItem.url = products.url.toString()
                     cartItem.qty = qty.toInt()
-                    db.cartDbCreate().addToCart(cartItem) }
+                    if (qty == 0){
+                        db.cartDbCreate().delete(products.id)
+                    }else{
+                        db.cartDbCreate().addToCart(cartItem)
+                    }
+                }
 
             }
         }

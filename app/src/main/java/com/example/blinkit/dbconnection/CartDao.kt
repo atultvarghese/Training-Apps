@@ -1,6 +1,7 @@
 package com.example.blinkit.dbconnection
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -14,4 +15,6 @@ interface CartDao {
     @Query("select * from CartEntity where qty > 0 and user = \"Atul\"")
     fun getCartData() : List<CartEntity>
 
+    @Query("delete from CartEntity where id = :id")
+    fun delete(id : Int)
 }
