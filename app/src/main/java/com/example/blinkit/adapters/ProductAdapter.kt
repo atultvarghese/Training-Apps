@@ -13,17 +13,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blinkit.R
 import com.example.blinkit.datas.Products
+import com.example.blinkit.dbconnection.CartEntity
+import com.example.blinkit.dbconnection.UsersDatabase
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 interface AdapterItemClickListener {
     fun onItemClicked(itemData :Products)
 }
 class ProductAdapter(private val listener: AdapterItemClickListener, var productList : ArrayList<Products>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
 
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+        var qty = 0
         var titleBox = itemView.findViewById<TextView>(R.id.title)
         var imageBox = itemView.findViewById<ImageView>(R.id.card_image)
-        var addButton = itemView.findViewById<Button>(R.id.plus)
+        var plusButton = itemView.findViewById<Button>(R.id.plus)
+        var minusButton = itemView.findViewById<Button>(R.id.minus)
+        var addToCart = itemView.findViewById<Button>(R.id.addtocart)
+        var qtyText = itemView.findViewById<TextView>(R.id.qty)
+        var db : UsersDatabase = UsersDatabase.getDataBase(itemView.context)
 
         fun productBindData(products: Products){
 
@@ -32,16 +41,28 @@ class ProductAdapter(private val listener: AdapterItemClickListener, var product
                 .load(products.url)
                 .into(imageBox);
 
-            addButton.setOnClickListener(){
-                var cartSP : SharedPreferences = itemView.context.getSharedPreferences("cart",
-                    AppCompatActivity.MODE_PRIVATE
-                )
-                var editor = cartSP.edit()
-                editor.putInt("id", products.id)
-                editor.putString("products", "value")
-                editor.putString("key2", "value")
-                Log.i("cart-data-adding", "Data Added to Cart $products")
-                editor.apply()
+            plusButton.setOnClickListener(){
+                if (qty < 10){
+                    qty ++
+                }
+                qtyText.text = qty.toString()
+            }
+
+            minusButton.setOnClickListener(){
+                if (qty > 0){
+                    qty --
+                }
+                qtyText.text = qty.toString()
+            }
+            addToCart.setOnClickListener(){
+                GlobalScope.launch { var cartItem = CartEntity()
+                    cartItem.id = products.id.toInt()
+                    cartItem.user = "Atul"
+                    cartItem.title = products.title.toString()
+                    cartItem.url = products.url.toString()
+                    cartItem.qty = qty.toInt()
+                    db.cartDbCreate().addToCart(cartItem) }
+
             }
         }
     }
