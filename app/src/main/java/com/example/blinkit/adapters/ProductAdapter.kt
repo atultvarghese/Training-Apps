@@ -1,10 +1,15 @@
 package com.example.blinkit.adapters
 
+import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blinkit.R
 import com.example.blinkit.datas.Products
@@ -18,6 +23,7 @@ class ProductAdapter(private val listener: AdapterItemClickListener, var product
 
         var titleBox = itemView.findViewById<TextView>(R.id.title)
         var imageBox = itemView.findViewById<ImageView>(R.id.card_image)
+        var addButton = itemView.findViewById<Button>(R.id.plus)
 
         fun productBindData(products: Products){
 
@@ -25,6 +31,18 @@ class ProductAdapter(private val listener: AdapterItemClickListener, var product
             Picasso.with(imageBox.context)
                 .load(products.url)
                 .into(imageBox);
+
+            addButton.setOnClickListener(){
+                var cartSP : SharedPreferences = itemView.context.getSharedPreferences("cart",
+                    AppCompatActivity.MODE_PRIVATE
+                )
+                var editor = cartSP.edit()
+                editor.putInt("id", products.id)
+                editor.putString("products", "value")
+                editor.putString("key2", "value")
+                Log.i("cart-data-adding", "Data Added to Cart $products")
+                editor.apply()
+            }
         }
     }
 
