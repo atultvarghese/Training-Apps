@@ -3,4 +3,7 @@
     <string name="train_number">Train Number</string>
     <string name="train_name">Train Name</string>
     <string name="search">SEARCH</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

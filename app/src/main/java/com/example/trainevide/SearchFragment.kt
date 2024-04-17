@@ -19,6 +19,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         binding.searchButton.setOnClickListener(){
             Toast.makeText(context, "Searching for ${binding.trainName.text} ${binding.trainNumber.text}", Toast.LENGTH_LONG).show()
         }
