@@ -5,7 +5,9 @@
     android:theme="@style/ThemeOverlay.TrainEvide.FullscreenContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFragment">
+    tools:context=".SearchFragment"
+    android:name="androidx.navigation.fragment.NavHostFragment"
+    app:defaultNavHost="true">
 
     <LinearLayout
         android:layout_width="match_parent"

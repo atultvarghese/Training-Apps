@@ -1,11 +1,8 @@
 package com.example.trainevide
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.Switch
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: MaterialToolbar = findViewById(R.id.materialToolbar)
         setSupportActionBar(toolbar)
-        setTitle("Evide ente train?? ")
+        setTitle("Evide ente train??")
 
         if (savedInstanceState == null) {
             supportFragmentManager

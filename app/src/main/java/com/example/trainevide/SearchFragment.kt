@@ -1,10 +1,10 @@
 package com.example.trainevide
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.trainevide.databinding.FragmentSearchBinding
 
@@ -19,11 +19,16 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         binding.searchButton.setOnClickListener(){
-            Toast.makeText(context, "Searching for ${binding.trainName.text} ${binding.trainNumber.text}", Toast.LENGTH_LONG).show()
+            var trainIntent = Intent(context, TrainsActivity::class.java)
+            trainIntent.putExtra("trainName", binding.trainName.text.toString())
+            trainIntent.putExtra("trainNumber", binding.trainNumber.text.toString())
+            startActivity(trainIntent)
         }
         return binding.root
-
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
