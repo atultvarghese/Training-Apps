@@ -57,21 +57,43 @@ class TrainsActivity : AppCompatActivity() {
         apiClient.search(search, object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
+                runOnUiThread {
+                    Log.i("my_tag", "Error ${e.printStackTrace()}")
+                    Toast.makeText(this@TrainsActivity, "Error in api ${e.printStackTrace()}.", Toast.LENGTH_LONG).show()
+                    finish()
+                }
             }
 
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(call: Call, response: Response) {
-                val responseJsonString = response.body?.string()
-                Log.i("my_tag", "$responseJsonString")
-                val listType: Type = object : TypeToken<List<TrainResponse>>() {}.type
-                val gson = Gson()
-                val trainResponseList: List<TrainResponse> = gson.fromJson(responseJsonString, listType)
-                // Perform UI updates on the main thread
-                runOnUiThread {
-                    myApiData.addAll(trainResponseList)
-                    // Notify RecyclerView adapter of data changes
-                    recycleViewAdapter.notifyDataSetChanged()
-                    Log.i("my_tag", "$trainResponseList")
+                try {
+                    val responseJsonString = response.body?.string()
+                    Log.i("my_tag", "$responseJsonString")
+                    val listType: Type = object : TypeToken<List<TrainResponse>>() {}.type
+                    val gson = Gson()
+                    val trainResponseList: List<TrainResponse> =
+                        gson.fromJson(responseJsonString, listType)
+//                Log.i("my_tag", "$trainResponseList")
+                    // Perform UI updates on the main thread
+                    runOnUiThread {
+                        if (trainResponseList.isEmpty()) {
+                            Toast.makeText(
+                                this@TrainsActivity,
+                                "No data found for the train.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            finish()
+                        } else {
+                            myApiData.addAll(trainResponseList)
+                            // Notify RecyclerView adapter of data changes
+                            recycleViewAdapter.notifyDataSetChanged()
+                        }
+                    }
+                } catch (e : Exception){
+                    runOnUiThread {
+                        Log.i("my_tag", "Error ${e.printStackTrace()}")
+                        Toast.makeText(this@TrainsActivity, "Error ${e.printStackTrace()}.", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         })

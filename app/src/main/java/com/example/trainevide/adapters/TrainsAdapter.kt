@@ -26,7 +26,7 @@ class TrainsAdapter(val context: Context, var trains : ArrayList<TrainResponse>)
         fun trainBindData(train : TrainResponse){
             binding.trainNameTextView.text = train.name
             binding.trainNumberTextView.text = train.trainNum.toString()
-            binding.fromToTextView.text = "Form ${train.trainFrom}  To ${train.trainTo}"
+            binding.fromToTextView.text = "Form ${train.trainFrom} To ${train.trainTo}"
             binding.departTimeTextView.text = "Departure on ${train.data.departTime}"
             binding.arriveTimeTextView.text = "Arrival in ${train.data.arriveTime}"
             changeColour(train, "Mon", binding.monButton)
