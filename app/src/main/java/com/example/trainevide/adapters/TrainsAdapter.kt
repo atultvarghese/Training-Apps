@@ -25,10 +25,10 @@ class TrainsAdapter(val context: Context, var trains : ArrayList<TrainResponse>)
         @SuppressLint("SetTextI18n")
         fun trainBindData(train : TrainResponse){
             binding.trainNameTextView.text = train.name
-            binding.trainNumberTextView.text = train.name
-            binding.fromToTextView.text = "${train.trainFrom}  to ${train.trainTo}"
-            binding.arriveTimeTextView.text = train.data.arriveTime
-            binding.departTimeTextView.text = train.data.departTime
+            binding.trainNumberTextView.text = train.trainNum.toString()
+            binding.fromToTextView.text = "Form ${train.trainFrom}  To ${train.trainTo}"
+            binding.departTimeTextView.text = "Departure on ${train.data.departTime}"
+            binding.arriveTimeTextView.text = "Arrival in ${train.data.arriveTime}"
             changeColour(train, "Mon", binding.monButton)
             changeColour(train, "Tue", binding.tueButton)
             changeColour(train, "Wed", binding.wedButton)

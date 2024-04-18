@@ -43,15 +43,6 @@
             android:layout_marginBottom="4dp"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/arriveTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Arrival Time"
-            android:textColor="@color/dark_gray"
-            android:layout_marginBottom="4dp"/>
-
-        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/departTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,6 +50,15 @@
             android:text="Departure Time"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/arriveTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Arrival Time"
+            android:textColor="@color/dark_gray"
+            android:layout_marginBottom="4dp"/>
 
         <LinearLayout
             android:id="@+id/daysLayout"
