@@ -49,7 +49,7 @@ class TrainsActivity : AppCompatActivity() {
         recycleView.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
         var myApiData = ArrayList<TrainResponse>()
 
-        var recycleViewAdapter = TrainsAdapter(myApiData)
+        var recycleViewAdapter = TrainsAdapter(this, myApiData)
         recycleView.adapter = recycleViewAdapter
 
         val apiClient = APIClient.create()

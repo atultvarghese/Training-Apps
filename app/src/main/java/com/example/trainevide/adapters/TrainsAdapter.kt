@@ -1,15 +1,27 @@
 package com.example.trainevide.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trainevide.R
 import com.example.trainevide.databinding.TrainLayoutBinding
 import com.example.trainevide.datas.TrainResponse
+import com.google.android.material.button.MaterialButton
 
-class TrainsAdapter(var trains : ArrayList<TrainResponse>) : RecyclerView.Adapter<TrainsAdapter.TrainsViewHolder>(){
+class TrainsAdapter(val context: Context, var trains : ArrayList<TrainResponse>) : RecyclerView.Adapter<TrainsAdapter.TrainsViewHolder>(){
     class TrainsViewHolder(var binding: TrainLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        private fun changeColour(train : TrainResponse, dayString: String, dayButton : MaterialButton){
+            if (train.data.days.get(dayString).toString() == "1"){
+                dayButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.green))
+            } else {
+                dayButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.light_red))
+            }
+        }
         @SuppressLint("SetTextI18n")
         fun trainBindData(train : TrainResponse){
             binding.trainNameTextView.text = train.name
@@ -17,6 +29,13 @@ class TrainsAdapter(var trains : ArrayList<TrainResponse>) : RecyclerView.Adapte
             binding.fromToTextView.text = "${train.trainFrom}  to ${train.trainTo}"
             binding.arriveTimeTextView.text = train.data.arriveTime
             binding.departTimeTextView.text = train.data.departTime
+            changeColour(train, "Mon", binding.monButton)
+            changeColour(train, "Tue", binding.tueButton)
+            changeColour(train, "Wed", binding.wedButton)
+            changeColour(train, "Thu", binding.thuButton)
+            changeColour(train, "Fri", binding.friButton)
+            changeColour(train, "Sat", binding.satButton)
+            changeColour(train, "Sun", binding.sunButton)
         }
     }
 
