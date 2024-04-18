@@ -1,4 +1,4 @@
-package com.example.trainevide.adapters
+package com.atultvarghese.trainevide.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainevide.R
-import com.example.trainevide.databinding.TrainLayoutBinding
-import com.example.trainevide.datas.TrainResponse
+import com.atultvarghese.trainevide.R
+import com.atultvarghese.trainevide.databinding.TrainLayoutBinding
+import com.atultvarghese.trainevide.datas.TrainResponse
 import com.google.android.material.button.MaterialButton
 
 class TrainsAdapter(val context: Context, var trains : ArrayList<TrainResponse>) : RecyclerView.Adapter<TrainsAdapter.TrainsViewHolder>(){

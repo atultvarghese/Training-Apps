@@ -1,4 +1,4 @@
-package com.example.trainevide
+package com.atultvarghese.trainevide
 
 import android.annotation.SuppressLint
 import android.os.Bundle

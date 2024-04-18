@@ -1,4 +1,4 @@
-package com.example.trainevide
+package com.atultvarghese.trainevide
 
 import APIClient
 import android.annotation.SuppressLint
@@ -12,8 +12,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.trainevide.adapters.TrainsAdapter
-import com.example.trainevide.datas.TrainResponse
+import com.atultvarghese.trainevide.adapters.TrainsAdapter
+import com.atultvarghese.trainevide.datas.TrainResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.Call

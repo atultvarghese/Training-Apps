@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.trainevide"
+    namespace = "com.atultvarghese.trainevide"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.trainevide"
+        applicationId = "com.atultvarghese.trainevide"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

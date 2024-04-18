@@ -1,4 +1,4 @@
-package com.example.trainevide.datas
+package com.atultvarghese.trainevide.datas
 
 
 data class TrainData(

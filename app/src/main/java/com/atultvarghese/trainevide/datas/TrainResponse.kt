@@ -1,4 +1,4 @@
-package com.example.trainevide.datas
+package com.atultvarghese.trainevide.datas
 
 import com.google.gson.annotations.SerializedName
 
