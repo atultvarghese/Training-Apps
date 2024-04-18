@@ -24,7 +24,7 @@ class TrainsAdapter(var trains : ArrayList<TrainResponse>) : RecyclerView.Adapte
 
 //        var trainView = LayoutInflater.from(parent.context).inflate(R.layout.train_layout, parent, false)
 //        return TrainsAdapter.TrainsViewHolder(trainView)
-        var binding = TrainLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = TrainLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TrainsAdapter.TrainsViewHolder(binding)
     }
 
