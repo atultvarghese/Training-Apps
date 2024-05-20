@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.jpcomposemvvm.databinding.MovieLayoutBinding
+import com.example.jpcomposemvvm.models.Movies
 import com.example.jpcomposemvvm.models.Result
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-    private var movieList = ArrayList<Result>()
-    fun setMovieList(movieList : List<Result>){
-        this.movieList = movieList as ArrayList<Result>
+    private var movieList = ArrayList<Result<Any?>>()
+    fun setMovieList(movieList: ArrayList<Movies>){
+        this.movieList = movieList as ArrayList<Result<Any?>>
         notifyDataSetChanged()
     }
     class ViewHolder(val binding : MovieLayoutBinding) : RecyclerView.ViewHolder(binding.root) {}

@@ -1,6 +1,6 @@
 package com.example.jpcomposemvvm.models
 
-data class Result(
+data class Result<T>(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,
