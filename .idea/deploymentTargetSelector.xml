@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="automotive">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-05-21T11:12:55.087217800Z">
+        <DropdownSelection timestamp="2024-05-21T11:19:08.287186Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\atulv\.android\avd\Pixel_Fold_API_34.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\atulv\.android\avd\Volvo_display_R.avd" />
             </handle>
           </Target>
         </DropdownSelection>

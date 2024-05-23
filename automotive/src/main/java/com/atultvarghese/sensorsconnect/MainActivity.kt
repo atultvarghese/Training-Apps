@@ -1,5 +1,6 @@
 package com.atultvarghese.sensorsconnect
 
+import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -21,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.atultvarghese.sensorsconnect.ui.theme.SensorsConnectTheme
+import com.atultvarghese.sensorsconnect.SensorViewModel
 
 class MainActivity : ComponentActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
@@ -31,11 +32,26 @@ class MainActivity : ComponentActivity(), SensorEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContent {
-            SensorsConnectTheme {
-                SensorScreen(viewModel = sensorViewModel)
-            }
+            SensorScreen(viewModel = sensorViewModel)
+        }
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val deviceSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_ALL)
+        Log.i("my_tag", "Device sensors: $deviceSensors")
+
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null) {
+            // Success! There's a magnetometer.
+            Log.i("my_tag", "Success there is light")
+
+        } else {
+            // Failure! No magnetometer.
+            Log.i("my_tag", "Failure there is no light sensor")
+
         }
     }
 
@@ -46,10 +62,11 @@ class MainActivity : ComponentActivity(), SensorEventListener {
                 Log.d("SensorData", "Light sensor value: $lux")
                 sensorViewModel.updateLightSensorData(lux)
             }
+
             Sensor.TYPE_ACCELEROMETER -> {
                 val acceleration = event.values[0]
                 Log.d("SensorData", "Accelerometer value: $acceleration")
-                if (acceleration > THRESHOLD) {
+                if (acceleration > 11.6) {
                     // Trigger ADAS event, e.g., collision warning
                 }
                 sensorViewModel.updateAccelerometerData(acceleration)
@@ -58,7 +75,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        TODO("Not yet implemented")
+        //abc
     }
 
     override fun onResume() {
@@ -70,16 +87,12 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
     }
-
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
     }
-
-    companion object {
-        private const val THRESHOLD = 15.0f
-    }
 }
+
 
 
 @Composable
